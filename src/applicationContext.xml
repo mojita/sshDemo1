@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.0.xsd
+       ">
+
+
+    <!--自动扫描与装配bean-->
+    <context:component-scan base-package="com.cn.oa"/>
+
+
+    <!--加载jdbc配置文件-->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+    <!--配置数据源-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="jdbcUrl" value="${jdbcUrl}"/>
+        <property name="driverClass" value="${driverClass}"/>
+        <property name="user" value="${username}"/>
+        <property name="password" value="${password}"/>
+
+        <!--初始化时创建三个链接-->
+        <property name="initialPoolSize" value="3"/>
+        <!--最大链接数量10,默认15-->
+        <property name="maxPoolSize" value="10"/>
+        <!--最小链接数量3,默认3-->
+        <property name="minPoolSize" value="3"/>
+        <!--当池中链接数量用完后,一次创建10个链接,默认为3-->
+        <property name="acquireIncrement" value="10"/>
+        <!--当maxStatements和maxStatementsPerConnection都为0是,则缓存被关闭,默认为0-->
+        <property name="maxStatements" value="8"/>
+        <property name="maxStatementsPerConnection" value="8"/>
+        <!--1000秒没有使用链接则被丢失-->
+        <property name="maxIdleTime" value="1000"/>
+    </bean>
+
+    <!--配置spring管理事务-->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:hibernate.cfg.xml"/>
+    </bean>
+
+    <!--配置申明事务管理(使用注解的方式)-->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+
+    <!--事务aop配置-->
+    <!--<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
+        <!--<property name="dataSource" ref="dataSource" />-->
+    <!--</bean>-->
+    <!--<tx:advice id="txAdvice" transaction-manager="txManager">-->
+        <!--<tx:attributes>-->
+            <!--<tx:method name="save*" propagation="REQUIRED"/>-->
+            <!--<tx:method name="add*" propagation="REQUIRED"/>-->
+            <!--<tx:method name="create*" propagation="REQUIRED"/>-->
+            <!--<tx:method name="insert*" propagation="REQUIRED"/>-->
+            <!--<tx:method name="*" read-only="true" />-->
+        <!--</tx:attributes>-->
+    <!--</tx:advice>-->
+
+    <!--<aop:config proxy-target-class="true">-->
+        <!--<aop:advisor advice-ref="txAdvice" pointcut="execution(* com.cn.ljh.dao ..*.*(..))" />-->
+    <!--</aop:config>-->
+
+
+
+
+    <!--采用注解管理事务-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!--<bean name="student" class="com.cn.ljh.domain.Student">-->
+        <!--<property name="name" value="小红"/>-->
+        <!--<property name="age" value="12"/>-->
+        <!--<property name="sex" value="男"/>-->
+    <!--</bean>-->
+
+    <!--<bean name="studentDao" class="com.cn.ljh.dao.impl.StudentDaoImpl"/>-->
+</beans>

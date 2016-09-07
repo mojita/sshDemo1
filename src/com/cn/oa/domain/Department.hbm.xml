@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.cn.oa.domain">
+    <class name="Department" table="oa_department">
+        <id name="id" column="departmentID">
+            <generator class="native"/>
+        </id>
+        <property name="name" column="name"/>
+        <property name="description" column="description"/>
+
+        <!--user属性,本类和User是一对多关系-->
+        <!--children,本类和department是一对多关系-->
+        <!--parent,本类和department是多对一关系-->
+
+        <set name="users">
+            <key column="departmentID"/>
+            <one-to-many class="User"/>
+        </set>
+
+        <set name="children" lazy="false">
+            <key column="parentID"/>
+            <one-to-many class="Department"/>
+        </set>
+
+        <many-to-one name="parent" column="childrenID" class="Department" lazy="false"/>
+    </class>
+</hibernate-mapping>

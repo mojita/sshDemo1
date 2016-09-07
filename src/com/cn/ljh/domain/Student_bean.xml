@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.cn.ljh.domain.Student" table="student">
+        <id name="sid" type="java.lang.Long" length="10">
+            <generator class="native"/>
+        </id>
+        <property name="name" type="java.lang.String" length="10"/>
+        <property name="age" type="java.lang.Integer" length="10"/>
+        <many-to-one name="course" cascade="save-update" class="com.cn.ljh.domain.Course"/>
+    </class>
+</hibernate-mapping>
+

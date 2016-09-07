@@ -1,0 +1,22 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="sshDemo1:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/sshDemo1_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="sshDemo1/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="sshDemo1" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="struts2" />
+          <element id="library" level="project" name="hibernate" />
+          <element id="library" level="project" name="mysql" />
+          <element id="library" level="module" name="testng" module-name="sshDemo1" />
+          <element id="library" level="project" name="spring" />
+          <element id="library" level="project" name="c3p0" />
+          <element id="library" level="project" name="jedis-2.9.0-javadoc" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

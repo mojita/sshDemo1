@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.cn.oa.domain">
+    <class name="Role" table="oa_role">
+        <id name="id" column="roleID">
+            <generator class="native"/>
+        </id>
+        <property name="name" column="name"/>
+        <property name="description" column="description"/>
+        <!--user属性,本类和User是多对多关系-->
+
+        <set name="users" table="oa_user_role">
+            <key column="roleID"/>
+            <many-to-many class="User" column="userID"/>
+        </set>
+
+    </class>
+</hibernate-mapping>

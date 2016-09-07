@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="jedis-2.9.0-javadoc">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../development_Library/jedis-2.9.0.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../../development_Library/jedis-2.9.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES />
+  </library>
+</component>

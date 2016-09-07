@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.cn.oa.domain">
+    <class name="User" table="oa_user">
+        <id name="id" column="userID">
+            <generator class="native"/>
+        </id>
+        <property name="name" column="name"/>
+        <property name="gender" column="gender"/>
+        <property name="description" column="description"/>
+        <property name="email" column="email"/>
+        <property name="password" column="password"/>
+        <property name="loginName" column="loginName"/>
+        <property name="phoneNum" column="phoneNum"/>
+
+        <!--本类和department是多对一关系-->
+        <!--本类和Role是多对多关系-->
+
+        <many-to-one name="department" column="departmentID" class="Department"/>
+
+        <set name="roles" table="oa_user_role">
+            <key column="userID"/>
+            <many-to-many class="Role" column="roleID"/>
+        </set>
+
+    </class>
+</hibernate-mapping>

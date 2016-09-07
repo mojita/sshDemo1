@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!--<property name="connection.username">root</property>-->
+        <!--<property name="connection.password">123</property>-->
+        <!--<property name="connection.url">jdbc:mysql://localhost:3306/sshDemo1</property>-->
+        <!--<property name="connection.driver_class">com.mysql.jdbc.Driver</property>-->
+
+        <!--方言-->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+
+        <property name="hbm2ddl.auto">update</property>
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
+
+
+        <!--<mapping resource="com/cn/ljh/domain/Student_bean.xml"/>-->
+        <!--<mapping resource="com/cn/ljh/domain/Course_bean.xml"/>-->
+        <!--<mapping resource="com/cn/ljh/domain/User_hbm.xml"/>-->
+        <mapping resource="com/cn/oa/domain/Role.hbm.xml"/>
+        <mapping resource="com/cn/oa/domain/User.hbm.xml"/>
+        <mapping resource="com/cn/oa/domain/Department.hbm.xml"/>
+    </session-factory>
+</hibernate-configuration>
